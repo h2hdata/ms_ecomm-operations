@@ -1,5 +1,5 @@
 # ms_ecomm-operations
-This repository consists of POC created for microservices domain. Problem is to manage operations for a typical ecommerce business.<br><br><br>
+This repository consists of POC created for microservices domain. Problem is to manage operations for a typical ecommerce business.<br><br>
 
 To enhance the complexity and capability of the FastAPI codebase using SQLAlchemy ORM version 2.0, you can incorporate several advanced features. Here’s an improved version of the codebase with more sophisticated features such as dependency injection for database sessions, pagination, and error handling.<br><br>
 Enhanced Project Structure<br>
