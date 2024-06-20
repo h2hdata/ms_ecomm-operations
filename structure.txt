@@ -1,0 +1,9 @@
+myapp/
+├── main.py
+├── models.py
+├── schemas.py
+├── crud.py
+├── database.py
+├── dependencies.py
+└── __init__.py
+

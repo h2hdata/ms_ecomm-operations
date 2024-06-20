@@ -1,0 +1,62 @@
+main.py:
+Initializes the FastAPI app.
+Defines endpoints for reading and creating items.
+Uses dependency injection to provide the database session to the endpoints.
+models.py:
+Defines the Item model using SQLAlchemy ORM.
+schemas.py:
+Defines Pydantic models for item creation and item retrieval.
+crud.py:
+Implements the CRUD operations for interacting with the database.
+Includes asynchronous functions for getting items and creating a new item.
+database.py:
+Configures the asynchronous database engine and session maker.
+Dependencies
+To use SQLAlchemy with async support, install the necessary dependencies:
+pip install fastapi sqlalchemy sqlalchemy[asyncio] aiosqlite pydantic
+
+
+This setup will allow you to create a scalable FastAPI application using SQLAlchemy ORM with async support, making your application more performant and capable of handling many concurrent database operations.
+
+Improvements Explained
+
+1. Dependency Injection:
+Using dependency injection for the database session ensures that each endpoint gets a fresh session. This is handled in dependencies.py with the get_db function.
+2. Configuration Management:
+Using pydantic.BaseSettings in config.py allows for centralized management of configuration settings, making it easy to switch between different environments.
+3. Error Handling:
+Implemented HTTPException in main.py to handle errors gracefully.
+4. Pagination:
+The read_items endpoint supports pagination via query parameters skip and limit.
+5. Environment Variables:
+The .env file allows easy management of environment variables and is parsed by Pydantic settings.
+
+Dependencies
+To use these features, ensure you have the necessary dependencies:
+pip install fastapi sqlalchemy sqlalchemy[asyncio] aiosqlite pydantic python-dotenv
+
+
+Calling Fastapi app:
+cd Documents
+uvicorn ecom3.main:app --reload
+
+Endpoints:
+Endpoint 1: Create Items with name and description
+Description: Creates a new user with a POST request to /items/.
+curl -X POST "http://localhost:8000/items/" -H "Content-Type: application/json" -d "{\"name\":\"Harry Potter\", \"description\": \"non-fictional and interesting story\"}"
+
+Endpoint 2: Read Items
+Description: Retrieves a list of items with a GET request to /items/.
+curl -X GET "http://localhost:8000/items/"
+-to retrieve first 10
+curl -X GET "http://localhost:8000/items/?skip=0&limit=10"
+-to retrieve next ten items
+curl -X GET "http://localhost:8000/items/?skip=10&limit=10"
+
+Endpoint 3: Update Item
+Endpoint: Update an existing item's information by item ID using a PUT request to /items/{item_id}. we can update name and description
+curl -X PUT "http://localhost:8000/items/1" -H "Content-Type: application/json" -d "{\"name\": \"Harry Potter\",\"description\": \"mindblowing story\"}"
+
+Endpoint 4: Delete Item
+Endpoint: Delete an existing user by ID using a DELETE request to /items/{item_id}.
+curl -X DELETE "http://localhost:8000/items/1"
